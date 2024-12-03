@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Books</h1>
+<table>
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Available</th>
+      <th>Rating</th>
+      <th>Upc</th>
+      <th>Url</th>
+      <th>Category</th>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <th>{{ book.title }}</th>
+        <th>{{ book.price }}</th>
+        <th>{{ book.available }}</th>
+        <th>{{ book.rating }}</th>
+        <th>{{ book.upc }}</th>
+        <th>{{ book.url }}</th>
+        <th><a href="{{ url_for('category_detail', name=book.category.name) }}">{{ book.category.name }}</a></th>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

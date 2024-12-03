@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('users') }}">Users</a>
+            <a href="{{ url_for('books') }}">Books</a>
+            <a href="{{ url_for('categories') }}">Categories</a>
+        </nav>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

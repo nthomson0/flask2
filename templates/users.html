@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Users</h1>
+<table>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+{% for user in users %}
+    <tr>
+        <th>{{ user.name.split()[0] }}</th>
+        <th>{{ user.name.split()[1] }}</th>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}
