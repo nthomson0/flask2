@@ -40,8 +40,6 @@ def category_detail(name):
     records1 = db.session.execute(statement1).scalar()
     statement2 = select(Book).where(Book.category_id == records1.id)
     records2 = db.session.execute(statement2).scalars()
-    for book in records2:
-        print(book.title)
     return render_template("category.html", books=records2, category=name)
 
 
