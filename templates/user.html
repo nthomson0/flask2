@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ user.name }}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Rented</th>
+            <th>Returned</th>
+        </tr>
+    </thead>
+    {% for rental in user.rented %}
+    <tr>
+        <td>{{ rental.book.title }}</td>
+        <td>{{ rental.rented }}</td>
+        <td>{{ rental.returned }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

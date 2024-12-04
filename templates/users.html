@@ -2,16 +2,9 @@
 
 {% block content %}
 <h1>Users</h1>
-<table>
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-    </tr>
+<ul>
 {% for user in users %}
-    <tr>
-        <th>{{ user.name.split()[0] }}</th>
-        <th>{{ user.name.split()[1] }}</th>
-    </tr>
+    <li><a href="{{ url_for('user_detail', id=user.id) }}">{{ user.name }}</a></li>
 {% endfor %}
-</table>
+</ul>
 {% endblock %}

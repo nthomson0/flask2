@@ -1,17 +1,39 @@
 from db import db
 from app import app
-from models import Book, Category, User
+from models import Book, Category, User, BookRental
+from datetime import datetime, timedelta
 from pathlib import Path
+from sqlalchemy.sql import func
+from random import random, randint
 import csv
 import sys
 
 from sqlalchemy import select
 
 def create_tables():
-    db.create_all()
+    with app.app_context():
+        db.create_all()
 
 def drop_tables():
-    db.drop_all()
+    with app.app_context():
+        db.drop_all()
+
+def create_rentals():
+    now = datetime.now()
+    with app.app_context():
+        for _ in range(10):
+            user = db.session.execute(select(User).order_by(func.random())).scalar()
+            book = db.session.execute(select(Book).order_by(func.random())).scalar()
+            rented = now - timedelta(days=randint(10, 25), hours=randint(0, 5))
+            returned = random() > 0.5
+            if returned:
+                returned = rented + timedelta(days=randint(2, 9), hours=randint(0, 100), minutes=(randint(0,100)))
+            else:
+                returned = None
+
+            rental = BookRental(user=user, book=book, rented=rented, returned=returned)
+            db.session.add(rental)
+            db.session.commit()
 
 class Importer:
     def __init__(self, filename):
@@ -53,7 +75,6 @@ class Importer:
                         db.session.add(user)
                         db.session.commit()
 
-
     def import_tables():
         with open(Path("data/users"), "r") as fp:
             reader = csv.DictReader(fp)
@@ -63,9 +84,10 @@ class Importer:
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == "reset":
-            with app.app_context():
-                drop_tables()
-                create_tables()
+            drop_tables()
+            create_tables()
         if sys.argv[1] == "import":
             Importer("data/books.csv")
             Importer("data/users.csv")
+        if sys.argv[1] == "rentals":
+            create_rentals()

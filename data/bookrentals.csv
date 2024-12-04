@@ -1,0 +1,9 @@
+book_upc,user_name,rented,returned
+expensive-book,Tim,2020-01-01 10:00,
+cheap-book,Fatima,2024-09-01 10:00,2024-09-02 10:00
+acit2515,John,2020-01-01 10:00,2024-01-01 10:00
+does-not-exist,Tim,2020-01-01 10:00,2021-01-01 10:00
+does-not-exist,John,2022-01-01 10:00,2023-01-01 10:00
+bad-rating-book,Yousef,2024-11-20 18:00,
+acit2515,Ganesh,2024-09-01 10:00,2024-11-15 18:00
+acit2515,Yousef,2024-11-19 10:00,2024-11-23 18:00
